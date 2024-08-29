@@ -21,7 +21,7 @@ function init_var(){
 	 next_month = Number(nmonth) + 1;
 	 next_month = ("0" + next_month).slice (-2);
 	 directori_RADAR="./IMATGES/RADAR/" + ndia + "/";
-         directori_CTL_ctl="./IMATGES/ctl/" + ndia + "/" + sim + "/";
+         directori_CTL_ctl="./IMATGES/CTL/" + ndia + "/" + sim + "/";
          directori_CTL_3DEnVAR="./IMATGES/3DEnVAR/" + ndia + "/" + sim + "/";
          directori_HOT_4dvar="./IMATGES/4DVAR/" + ndia + "/" + sim + "/";
          directori_4DEnVAR="./IMATGES/4DEnVAR/" + ndia + "/" + sim + "/";
@@ -49,9 +49,9 @@ function carrega_gif(){
         if(camp=="nuv") {
                 nmin=1;
                 nmax=3;
-                if(n==3) {variable="clh"; nivell="ALT";}
-                if(n==2) {variable="clm"; nivell="MIG";}
-                if(n==1) {variable="cll"; nivell="BAIX";}
+                if(n==3) {variable="clh"; nivell="High";}
+                if(n==2) {variable="clm"; nivell="Medium";}
+                if(n==1) {variable="cll"; nivell="Low";}
                 //if(n==1) {variable="tcc"; nivell="TOTS";}
         }
 
@@ -251,10 +251,12 @@ function animacio(pas){
 	<OPTION value=18>18
 	<OPTION value=21>21
 	</OPTION></SELECT> </TD>
-    <TD><B>+</B> <INPUT maxLength=2 size=2 value=12 name=hora> <B>UTC</B></TD>
+    <TD><B>+</B> <INPUT maxLength=2 size=2 value=12 name=hora> <B>hours</B></TD>
+    
+<TD width="1%"></TD>
 
 <td>
-<b>CAMP</b>
+<b>Parameter</b>
 <SELECT NAME="camp" width="300" onchange="init_var('')">
 <OPTION  VALUE="RH">RH / Wind
 <OPTION  VALUE="u">Wind / Streamlines
