@@ -1,0 +1,325 @@
+<HTML><HEAD>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<!---------SCRIPT JAVA------------->
+<SCRIPT javascript>
+
+i=1;
+t=1;
+n=1;
+tmin=1;
+tmax=13;
+interval=1;
+
+function init_var(){
+	 camp = document.num1.camp.options[document.num1.camp.selectedIndex].value;
+	 sim = document.num1.sim.value;
+	 ndia = document.num1.ndia.value;
+         nmonth = ndia.substring(4, 6)
+         nday = ndia.substring(6, 8)
+         nmday = Number(nday) + 1;
+         nmday = ("0" + nmday).slice (-2);
+	 next_month = Number(nmonth) + 1;
+	 next_month = ("0" + next_month).slice (-2);
+	 directori_RADAR="./IMATGES/RADAR/" + ndia + "/";
+         directori_CTL_ctl="./IMATGES/CASOS_CTL/ctl/" + ndia + "/" + sim + "/";
+         directori_CTL_3dvar="./IMATGES/CASOS_CTL/3dvar/" + ndia + "/" + sim + "/";
+         directori_CTL_3DEnVAR="./IMATGES/CASOS_CTL/3DEnVAR/" + ndia + "/" + sim + "/";
+         directori_CTL_stmas="./IMATGES/CASOS_CTL/stmas/" + ndia + "/" + sim + "/";
+         directori_EXP_ctl="./IMATGES/CASOS_EXP/ctl/" + ndia + "/" + sim + "/";
+         directori_EXP_3dvar="./IMATGES/CASOS_EXP/3dvar/" + ndia + "/" + sim + "/";
+         directori_EXP_3DEnVAR="./IMATGES/CASOS_EXP/3DEnVAR/" + ndia + "/" + sim + "/";
+         directori_EXP_stmas="./IMATGES/CASOS_EXP/stmas/" + ndia + "/" + sim + "/";
+         directori_HOT_3dvar="./IMATGES/CASOS_HOT/3dvar/" + ndia + "/" + sim + "/";
+         directori_HOT_4dvar="./IMATGES/CASOS_4DVAR/4DVAR/" + ndia + "/" + sim + "/";
+         directori_4DEnVAR="./IMATGES/CASOS_4DEnVAR/4DEnVAR/" + ndia + "/" + sim + "/";
+         directori_MR4DEnVAR="./IMATGES/CASOS_4DVAR/MR4DEnVAR/" + ndia + "/" + sim + "/";
+         nd04="../../gifs/nd04.gif";
+	 carrega_gif();
+
+}
+
+
+function carrega_gif(){
+        	
+        hora = (t-1)*interval;
+ 	horatext = hora;
+
+        if(camp=="RH") {
+                nmin=1;
+                nmax=4;
+                if(n==4) {variable=camp +"500"; nivell="500";}
+                if(n==3) {variable=camp +"700"; nivell="700";}
+                if(n==2) {variable=camp +"850"; nivell="850";}
+                if(n==1) {variable=camp +"950"; nivell="950";}
+        }
+
+        if(camp=="nuv") {
+                nmin=1;
+                nmax=3;
+                if(n==3) {variable="clh"; nivell="ALT";}
+                if(n==2) {variable="clm"; nivell="MIG";}
+                if(n==1) {variable="cll"; nivell="BAIX";}
+                //if(n==1) {variable="tcc"; nivell="TOTS";}
+        }
+
+        if(camp=="tvs") {
+                nmin=1;
+                nmax=1;
+                variable = camp; 
+                nivell = "SFC";
+        }
+
+        if(camp=="RH2m") {
+                nmin=1;
+                nmax=1;
+                variable = camp; 
+                nivell = "SFC";
+        }
+
+      	if(camp=="u") {
+                nmin=1;
+                nmax=4;
+                if(n>nmax) {n=nmax;}
+                if(n==4) {variable=camp +"700"; nivell="700";}
+                if(n==3) {variable=camp +"850"; nivell="850";}
+                if(n==2) {variable=camp +"950"; nivell="950";}
+                if(n==1) {variable=camp +"10m"; nivell="SFC";}
+        }
+
+        if(camp=="vmax") {
+                if(hora=="00"){hora=1; horatext=1; t=2;}
+                nmin=1;
+                nmax=1;
+                variable = camp;
+                nivell = "SFC";
+        }
+
+        if(camp=="pcpcota") {
+                if(hora==0){hora=1; horatext=1; t=2;}
+                nmin=1;
+                nmax=1;
+                variable = "plu-cota";
+                nivell = "a.s.l.";
+        }
+
+        if(camp=="plu") {
+                if(hora==0){hora=1; horatext=1; t=2;}
+                nmin=1;
+                nmax=1;
+                variable = camp;
+                nivell = "SFC";
+        }
+
+        if(camp=="temps") {
+                if(hora==0){hora=1; horatext=1; t=2;}
+                nmin=1;
+                nmax=1;
+                variable = camp;
+                nivell = "SFC";
+        }
+
+        if(camp=="cape") {
+                nmin=1;
+                nmax=1;
+                variable = camp;
+                nivell = "SFC";
+        }
+
+        if(camp=="cumul") {
+                if(horatext<6){horatext=6; temps="06"; kday= nday; khour="06"; }
+                else if(horatext<12){horatext=12; temps=12; kday= nday; khour=12; }
+                else if(horatext<18){horatext=18; temps=18; kday= nday; khour=18; }
+                else if(horatext<24){horatext=24; temps=24; kday= nday; khour=24; }
+                else if(horatext<30){horatext=30; temps=30; kday= nmday; khour="06"; }
+                else if(horatext<36){horatext=36; temps=36; kday= nmday; khour=12; }
+                else if(horatext<42){horatext=42; temps=42; kday= nmday; khour=18; }
+                else if(horatext<48){horatext=48; temps=48; kday= nmday; khour=24; }
+                nmin=1;
+                nmax=1;
+                variable = camp;
+                nivell = "SFC";
+   
+        }
+	
+        if(camp=="neu") {
+                if(hora==0){hora=1; horatext=1; t=2;}
+                nmin=1;
+                nmax=1;
+                variable = camp;
+                nivell = "SFC";
+        }
+
+
+	start_hora = Number(sim) + Number(hora) - 1;
+	kday = nday;
+	kmonth = nmonth;
+	if (start_hora > 23) {
+		start_hora = start_hora - 24;
+		kday = nmday;
+         	if (kday > 31) {
+			kday = "01";
+			kmonth = next_month;
+		}
+	}
+	end_hora = Number(start_hora) + 1;
+	if (end_hora > 23) {
+		end_hora = end_hora - 24;
+	}
+	s_hora = ("0" + start_hora).slice (-2);
+	e_hora = ("0" + end_hora).slice (-2);
+
+
+	arxiu0 = directori_RADAR + "radar_" +  ndia.substring(2, 4) + kmonth + kday + s_hora + "_" + e_hora + ".gif"
+	arxiu1 = directori_CTL_ctl  + hora + variable + ".gif";
+	arxiu2 = directori_CTL_3DEnVAR + hora + variable + ".gif";
+	arxiu3 = directori_HOT_4dvar + hora + variable + ".gif";
+	arxiu4 = directori_4DEnVAR + hora + variable + ".gif";
+	arxiu5 = directori_MR4DEnVAR + hora + variable + ".gif";
+
+	if (camp != "plu" && t == 1) {
+		arxiu0 = nd04;
+	}
+
+        document.images[0].src = arxiu0;
+ 	document.images[1].src = arxiu1;
+	document.images[2].src = arxiu2;
+	document.images[3].src = arxiu3;
+	document.images[4].src = arxiu4;
+	document.images[5].src = arxiu5;
+
+
+ 	document.num1.hora.value=horatext;
+ 	document.num1.nivell.value=nivell;
+
+}
+
+ 
+function animacio(pas){
+
+        if(pas=="inici") {t=1;n=n;}
+
+        if(pas=="mes")   {t=t+1; n=n;}
+        if(pas=="mes24"){t=t+24; n=n;}
+        if(pas=="menys") {t=t-1; n=n;}
+        if(pas=="menys24") {t=t-24; n=n;}
+
+        if(pas=="amunt") {t=t; n=n+1;}
+        if(pas=="avall") {t=t; n=n-1;}
+
+        if(t>tmax) t=tmax;
+        if(t<tmin) t=tmin;
+
+        if(n>nmax) n=nmax;
+        if(n<nmin) n=nmin;
+
+	carrega_gif(); 
+
+}
+                                                                                                                                    
+</SCRIPT>
+<!---------PAGINA HTML------------->
+<META content="MSHTML 6.00.2900.3268" name=GENERATOR></HEAD>
+<BODY background=../../gifs/fons.jpg onload=init_var() img>
+<CENTER>
+<FORM name=num1>
+
+<HR>
+<CENTER>
+    <B><FONT SIZE="+2">Nowcasting WRF 4DVAR</FONT></B>
+</CENTER>
+<HR>
+
+<CENTER>
+
+<TABLE bgColor=white>
+  <TBODY>
+  <TR>
+	<TD><B>DIA</B>  
+       <SELECT NAME="ndia" width="300" onchange="init_var('')">
+      <OPTION value="20201207" selected>20201207
+      <OPTION value="20210131">20210131
+      <OPTION value="20210308">20210308
+      <OPTION value="20210426">20210426
+      <OPTION value="20210511">20210511
+      <OPTION value="20210601">20210601
+      <OPTION value="20210617">20210617
+      <OPTION value="20211003">20211003
+      <OPTION value="20211123">20211123
+      <OPTION value="20220817">20220817
+      </OPTION></SELECT> </TD>
+
+    <TD width="1%"></TD>
+
+    <TD><B>NIVELL</B> <INPUT maxLength=4 size=4 value=SFC name=nivell> 
+      <B>hPa</B> </TD>
+
+    <TD width="1%"></TD>
+
+    <TD><B>INICI</B> <SELECT onchange="init_var('')" name=sim width="300"> 
+        <OPTION value=00 selected>00
+	<OPTION value=03>03
+	<OPTION value=06>06
+	<OPTION value=09>09
+	<OPTION value=12>12
+	<OPTION value=15>15
+	<OPTION value=18>18
+	<OPTION value=21>21
+	</OPTION></SELECT> </TD>
+    <TD><B>+</B> <INPUT maxLength=2 size=2 value=12 name=hora> <B>HORES</B></TD>
+
+<td>
+<b>CAMP</b>
+<SELECT NAME="camp" width="300" onchange="init_var('')">
+<OPTION  VALUE="RH">HR / Vent
+<OPTION  VALUE="u">Vent / L&iacute;nies corrent
+<OPTION  VALUE="tvs">T / Vent (SFC)
+<OPTION  VALUE="RH2m">HR / Vent (SFC)
+<OPTION  VALUE="plu" selected>Precipitaci&oacute;
+<OPTION  VALUE="nuv">Nuvolositat
+<OPTION  VALUE="cape">CAPE / LI
+</SELECT>
+</td>
+
+
+</TR></TBODY></TABLE>
+
+<BR>
+<INPUT onclick="animacio('amunt')" type=button value=/\ name=menys> 
+<BR>
+<INPUT onclick="animacio('menys')" type=button value="<" name=menys>
+<INPUT onclick="animacio('inici')" type=button value=INICI name=boto> 
+<INPUT onclick="animacio('mes')" type=button value=">" name=mes>
+<BR>
+<INPUT onclick="animacio('avall')" type=button value=\/ name=menys> 
+<HR>
+<TABLE bgColor=white>
+
+<TBODY>
+<TR>
+<TD align=center><B><I><FONT size=+1></FONT><FONT color="black">RADAR</FONT></I></B></TD>
+<TD align=center><B><I><FONT size=+1></FONT><FONT color="black">WRF-CTL ctl</FONT></I></B></TD>
+<TD align=center><B><I><FONT size=+1></FONT><FONT color="blue">WRF-CTL 3DEnVAR</FONT></I></B></TD>
+</TR>
+
+<TR>
+<TD align=center><IMG border=0 width=340 height=277></TD>
+<TD align=center><IMG border=0 width=340 height=277></TD>
+<TD align=center><IMG border=0 width=340 height=277></TD>
+</TR>
+
+<TR>
+<TD align=center><B><I><FONT size=+1></FONT><FONT color="red">WRF 4DVAR</FONT></I></B></TD>
+<TD align=center><B><I><FONT size=+1></FONT><FONT color="purple">WRF 4DEnVAR</FONT></I></B></TD>
+<TD align=center><B><I><FONT size=+1></FONT><FONT color="magenta">WRF MR4DEnVAR</FONT></I></B></TD>
+</TR>
+
+<TR>
+<TD align=center><IMG border=0 width=340 height=277></TD>
+<TD align=center><IMG border=0 width=340 height=277></TD>
+<TD align=center><IMG border=0 width=340 height=277></TD>
+</TR>
+
+
+</TBODY></TABLE>
+
+</FORM></CENTER></BODY></HTML>
