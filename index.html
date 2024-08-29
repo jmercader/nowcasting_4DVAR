@@ -21,18 +21,11 @@ function init_var(){
 	 next_month = Number(nmonth) + 1;
 	 next_month = ("0" + next_month).slice (-2);
 	 directori_RADAR="./IMATGES/RADAR/" + ndia + "/";
-         directori_CTL_ctl="./IMATGES/CASOS_CTL/ctl/" + ndia + "/" + sim + "/";
-         directori_CTL_3dvar="./IMATGES/CASOS_CTL/3dvar/" + ndia + "/" + sim + "/";
-         directori_CTL_3DEnVAR="./IMATGES/CASOS_CTL/3DEnVAR/" + ndia + "/" + sim + "/";
-         directori_CTL_stmas="./IMATGES/CASOS_CTL/stmas/" + ndia + "/" + sim + "/";
-         directori_EXP_ctl="./IMATGES/CASOS_EXP/ctl/" + ndia + "/" + sim + "/";
-         directori_EXP_3dvar="./IMATGES/CASOS_EXP/3dvar/" + ndia + "/" + sim + "/";
-         directori_EXP_3DEnVAR="./IMATGES/CASOS_EXP/3DEnVAR/" + ndia + "/" + sim + "/";
-         directori_EXP_stmas="./IMATGES/CASOS_EXP/stmas/" + ndia + "/" + sim + "/";
-         directori_HOT_3dvar="./IMATGES/CASOS_HOT/3dvar/" + ndia + "/" + sim + "/";
-         directori_HOT_4dvar="./IMATGES/CASOS_4DVAR/4DVAR/" + ndia + "/" + sim + "/";
-         directori_4DEnVAR="./IMATGES/CASOS_4DEnVAR/4DEnVAR/" + ndia + "/" + sim + "/";
-         directori_MR4DEnVAR="./IMATGES/CASOS_4DVAR/MR4DEnVAR/" + ndia + "/" + sim + "/";
+         directori_CTL_ctl="./IMATGES/ctl/" + ndia + "/" + sim + "/";
+         directori_CTL_3DEnVAR="./IMATGES/3DEnVAR/" + ndia + "/" + sim + "/";
+         directori_HOT_4dvar="./IMATGES/4DVAR/" + ndia + "/" + sim + "/";
+         directori_4DEnVAR="./IMATGES/4DEnVAR/" + ndia + "/" + sim + "/";
+         directori_MR4DEnVAR="./IMATGES/MR4DEnVAR/" + ndia + "/" + sim + "/";
          nd04="../../gifs/nd04.gif";
 	 carrega_gif();
 
@@ -234,28 +227,21 @@ function animacio(pas){
 <TABLE bgColor=white>
   <TBODY>
   <TR>
-	<TD><B>DIA</B>  
+	<TD><B>DAY</B>  
        <SELECT NAME="ndia" width="300" onchange="init_var('')">
-      <OPTION value="20201207" selected>20201207
-      <OPTION value="20210131">20210131
-      <OPTION value="20210308">20210308
-      <OPTION value="20210426">20210426
-      <OPTION value="20210511">20210511
-      <OPTION value="20210601">20210601
+      <OPTION value="20210426" selected>20210426
       <OPTION value="20210617">20210617
-      <OPTION value="20211003">20211003
-      <OPTION value="20211123">20211123
       <OPTION value="20220817">20220817
       </OPTION></SELECT> </TD>
 
     <TD width="1%"></TD>
 
-    <TD><B>NIVELL</B> <INPUT maxLength=4 size=4 value=SFC name=nivell> 
+    <TD><B>LEVEL</B> <INPUT maxLength=4 size=4 value=SFC name=nivell> 
       <B>hPa</B> </TD>
 
     <TD width="1%"></TD>
 
-    <TD><B>INICI</B> <SELECT onchange="init_var('')" name=sim width="300"> 
+    <TD><B>INIT</B> <SELECT onchange="init_var('')" name=sim width="300"> 
         <OPTION value=00 selected>00
 	<OPTION value=03>03
 	<OPTION value=06>06
@@ -265,17 +251,17 @@ function animacio(pas){
 	<OPTION value=18>18
 	<OPTION value=21>21
 	</OPTION></SELECT> </TD>
-    <TD><B>+</B> <INPUT maxLength=2 size=2 value=12 name=hora> <B>HORES</B></TD>
+    <TD><B>+</B> <INPUT maxLength=2 size=2 value=12 name=hora> <B>UTC</B></TD>
 
 <td>
 <b>CAMP</b>
 <SELECT NAME="camp" width="300" onchange="init_var('')">
-<OPTION  VALUE="RH">HR / Vent
-<OPTION  VALUE="u">Vent / L&iacute;nies corrent
-<OPTION  VALUE="tvs">T / Vent (SFC)
-<OPTION  VALUE="RH2m">HR / Vent (SFC)
-<OPTION  VALUE="plu" selected>Precipitaci&oacute;
-<OPTION  VALUE="nuv">Nuvolositat
+<OPTION  VALUE="RH">RH / Wind
+<OPTION  VALUE="u">Wind / Streamlines
+<OPTION  VALUE="tvs">T / Wind (SFC)
+<OPTION  VALUE="RH2m">RH / Wind (SFC)
+<OPTION  VALUE="plu" selected>Precipitation
+<OPTION  VALUE="nuv">Clouds
 <OPTION  VALUE="cape">CAPE / LI
 </SELECT>
 </td>
@@ -296,9 +282,9 @@ function animacio(pas){
 
 <TBODY>
 <TR>
-<TD align=center><B><I><FONT size=+1></FONT><FONT color="black">RADAR</FONT></I></B></TD>
-<TD align=center><B><I><FONT size=+1></FONT><FONT color="black">WRF-CTL ctl</FONT></I></B></TD>
-<TD align=center><B><I><FONT size=+1></FONT><FONT color="blue">WRF-CTL 3DEnVAR</FONT></I></B></TD>
+<TD align=center><B><I><FONT size=+1></FONT><FONT color="black">OBS RADAR</FONT></I></B></TD>
+<TD align=center><B><I><FONT size=+1></FONT><FONT color="black">CTL</FONT></I></B></TD>
+<TD align=center><B><I><FONT size=+1></FONT><FONT color="blue">3DEn</FONT></I></B></TD>
 </TR>
 
 <TR>
@@ -308,9 +294,9 @@ function animacio(pas){
 </TR>
 
 <TR>
-<TD align=center><B><I><FONT size=+1></FONT><FONT color="red">WRF 4DVAR</FONT></I></B></TD>
-<TD align=center><B><I><FONT size=+1></FONT><FONT color="purple">WRF 4DEnVAR</FONT></I></B></TD>
-<TD align=center><B><I><FONT size=+1></FONT><FONT color="magenta">WRF MR4DEnVAR</FONT></I></B></TD>
+<TD align=center><B><I><FONT size=+1></FONT><FONT color="red">SW4D</FONT></I></B></TD>
+<TD align=center><B><I><FONT size=+1></FONT><FONT color="purple">4DEn</FONT></I></B></TD>
+<TD align=center><B><I><FONT size=+1></FONT><FONT color="magenta">MR4D</FONT></I></B></TD>
 </TR>
 
 <TR>
